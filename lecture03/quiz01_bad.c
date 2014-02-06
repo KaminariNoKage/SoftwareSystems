@@ -5,11 +5,12 @@ License: GNU GPLv3
 
 */
 
-#include <stdio.h>;
+#include <stdio.h>
+#include <lib.h>
 
 // Checks whether a character is a digit.
 int is_digit(char c) {
-    return c >= '0' & c <= '9';
+    return (c >= '0') && (c <= '9');
 }
 
 // Checks whether a string is an integer (all digits).
