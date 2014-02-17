@@ -76,20 +76,30 @@ tm: number of time steps
 
 returns: tuple of sequences (times, targets, errors)
 """
-    def setpoint( t ):
-        if t < 100: return 0
-        if t < 300: return 50
-        return 10
+    def setpoint( t, buff ):
+        return t*buff
+    
+    def findMinRMS (t, y):
+        ''' Finds the minimum RMS '''
+        min = 10
+        i = 1
+        while (i > 0.005):
+            r = setpoint(t, i)
+            e = r - y
+            if min > e:
+                min = e
+            i -= 0.0001
+        return r,min
     
     y = 0
     res = []
     for t in range( tm ):
-        r = setpoint(t)
-        e = r - y
+        r, e = findMinRMS(t, y)
+        
         u = c.work(e)
         y = p.work(u)
 
-        #print t, r, e, u, y
+        print t, r, e, u, y
         res.append((t, r, e, u, y))
 
     return zip(*res)
