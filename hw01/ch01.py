@@ -17,11 +17,11 @@ class Buffer:
     def __init__( self, max_wip, max_flow ):
         """Initializes the buffer:
 
-        max_wip: maximum work in progress
-        max_flow: maximum work completed per time step
-        """
+max_wip: maximum work in progress
+max_flow: maximum work completed per time step
+"""
         self.queued = 0
-        self.wip = 0             # work-in-progress ("ready pool")
+        self.wip = 0 # work-in-progress ("ready pool")
 
         self.max_wip = max_wip
         self.max_flow = max_flow # avg outflow is max_flow/2
@@ -48,19 +48,19 @@ class Controller:
     def __init__( self, kp, ki ):
         """Initializes the controller.
 
-        kp: proportional gain
-        ki: integral gain
-        """
+kp: proportional gain
+ki: integral gain
+"""
         self.kp, self.ki = kp, ki
-        self.i = 0       # Cumulative error ("integral")
+        self.i = 0 # Cumulative error ("integral")
 
     def work( self, e ):
         """Computes the number of jobs to be added to the ready queue.
 
-        e: error
+e: error
 
-        returns: float number of jobs
-        """
+returns: float number of jobs
+"""
         self.i += e
 
         return self.kp*e + self.ki*self.i
@@ -70,12 +70,12 @@ class Controller:
 def closed_loop( c, p, tm=5000 ):
     """Simulates a closed loop control system.
 
-    c: Controller object
-    p: Buffer object
-    tm: number of time steps
+c: Controller object
+p: Buffer object
+tm: number of time steps
 
-    returns: tuple of sequences (times, targets, errors)
-    """
+returns: tuple of sequences (times, targets, errors)
+"""
     def setpoint( t ):
         if t < 100: return 0
         if t < 300: return 50
@@ -96,7 +96,7 @@ def closed_loop( c, p, tm=5000 ):
 
 # ============================================================
 
-c = Controller( 1.25, 0.01 )
+c = Controller( 1.25, 0 )
 p = Buffer( 50, 10 )
 
 # run the simulation
@@ -113,6 +113,3 @@ pyplot.plot(ts, rs, color='green', label='target')
 pyplot.plot(ts, ys, color='red', label='queue length')
 pyplot.plot(ts, ys_smooth, color='blue', label='trend')
 pyplot.show()
-
-
-
