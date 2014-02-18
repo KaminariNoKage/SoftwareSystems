@@ -2046,7 +2046,7 @@ configure:10799: $? = 0
 configure:10799: result: yes
 configure:10799: checking for _set_invalid_parameter_handler
 configure:10799: gcc -o conftest  -O2 -Wall   conftest.c  >&5
-/tmp/ccrntgVl.o: In function `main':
+/tmp/cc0mrD8M.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `_set_invalid_parameter_handler'
 collect2: error: ld returned 1 exit status
 configure:10799: $? = 1
@@ -2241,7 +2241,7 @@ configure:10799: $? = 0
 configure:10799: result: yes
 configure:10799: checking for nanotime
 configure:10799: gcc -o conftest  -O2 -Wall   conftest.c  >&5
-/tmp/cchG2t4N.o: In function `main':
+/tmp/ccb95fqs.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `nanotime'
 collect2: error: ld returned 1 exit status
 configure:10799: $? = 1
@@ -2454,7 +2454,7 @@ configure:10799: $? = 0
 configure:10799: result: yes
 configure:10799: checking for secure_getenv
 configure:10799: gcc -o conftest  -O2 -Wall   conftest.c  >&5
-/tmp/cc9IW6rp.o: In function `main':
+/tmp/cc9GHbu1.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `secure_getenv'
 collect2: error: ld returned 1 exit status
 configure:10799: $? = 1
@@ -2682,7 +2682,7 @@ configure:10799: $? = 0
 configure:10799: result: yes
 configure:10799: checking for vasnprintf
 configure:10799: gcc -o conftest  -O2 -Wall   conftest.c  >&5
-/tmp/ccE3kXHe.o: In function `main':
+/tmp/ccg3ENPH.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `vasnprintf'
 collect2: error: ld returned 1 exit status
 configure:10799: $? = 1
@@ -4065,7 +4065,7 @@ configure:14977: gcc -o conftest  -O2 -Wall   conftest.c  >&5
 conftest.c: In function 'main':
 conftest.c:200:1: warning: null argument where non-null required (argument 1) [-Wnonnull]
 conftest.c:201:16: warning: null argument where non-null required (argument 1) [-Wnonnull]
-/tmp/ccTK9PQ7.o: In function `main':
+/tmp/ccYeNyAS.o: In function `main':
 conftest.c:(.text.startup+0xe): undefined reference to `pthread_mutexattr_init'
 collect2: error: ld returned 1 exit status
 configure:14977: $? = 1
@@ -5804,7 +5804,7 @@ configure:20859: checking whether btowc(EOF) is correct
 configure:20910: result: guessing yes
 configure:20965: checking for library containing clock_gettime
 configure:20996: gcc -o conftest  -O2 -Wall   conftest.c  >&5
-/tmp/ccApHcbC.o: In function `main':
+/tmp/ccxnLT1n.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `clock_gettime'
 collect2: error: ld returned 1 exit status
 configure:20996: $? = 1
@@ -9231,7 +9231,7 @@ configure:27663: checking for working re_compile_pattern
 configure:27871: gcc -o conftest  -O2 -Wall   conftest.c  >&5
 configure:27871: $? = 0
 configure:27871: ./conftest
-./configure: line 2586: 11282 Terminated              ./conftest$ac_exeext
+./configure: line 2586:  8298 Terminated              ./conftest$ac_exeext
 configure:27871: $? = 143
 configure: program exited with status 143
 configure: failed program was:
@@ -17567,7 +17567,7 @@ configure:33984: $? = 0
 configure:33984: result: yes
 configure:33984: checking for sigsetjmp
 configure:33984: gcc -o conftest  -O2 -Wall   conftest.c  >&5
-/tmp/ccEJWHQf.o: In function `main':
+/tmp/ccYaj2Gd.o: In function `main':
 conftest.c:(.text.startup+0x7): undefined reference to `sigsetjmp'
 collect2: error: ld returned 1 exit status
 configure:33984: $? = 1
@@ -26474,6 +26474,7 @@ config.status:2393: creating tests/Makefile
 config.status:2393: creating tests/WgetTest.pm
 config.status:2393: creating lib/Makefile
 config.status:2393: creating src/config.h
+config.status:2574: src/config.h is unchanged
 config.status:2653: executing depfiles commands
 config.status:2653: executing po-directories commands
 configure:38245: Summary of build options:
