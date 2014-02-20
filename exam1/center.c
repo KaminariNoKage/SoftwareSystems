@@ -18,8 +18,23 @@ License: Creative Commons Attribution-ShareAlike 3.0
 
 char *center(char *s, int n, char fillchar)
 {
-    // FILL THIS IN
-    //    return NULL;
+    int MAX_WIDTH = strlen(s) + n + 1;
+    char nuString[ MAX_WIDTH ];
+    char tempString[ MAX_WIDTH ];
+    int filwidth = strlen(s)/2;
+    int i;
+
+    for (i=0; i < filwidth; i++){
+        nuString[i] = fillchar;
+        tempString[i] = fillchar;
+    }
+    if (i < filwidth){
+        tempString[i+1] = filchar;
+    }
+    strcat(nuString, s);
+    strcat(nuString, tempString);
+
+    return nuString;
 }
 
 
