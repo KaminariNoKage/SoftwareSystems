@@ -90,6 +90,26 @@ float my_random_float2()
 double my_random_double()
 {
   // TODO: fill this in
+  int x, exp, mant;
+  double d;
+
+  union {
+    double d;
+    int i;
+  } b;
+
+  x = random();
+
+  while (x & mask) {
+    mask <<= 1;
+    exp--;
+  }
+
+  // use the remaining bit as the mantissa
+  mant = x >> 8;
+  b.i = (exp << 23) | mant;
+
+  return b.d;
 }
 
 // return a constant (this is a dummy function for time trials)
