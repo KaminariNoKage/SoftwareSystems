@@ -89,16 +89,28 @@ float my_random_float2()
 // compute a random double using my algorithm
 double my_random_double()
 {
-  // TODO: fill this in
-  int x, exp, mant;
+  FILE *file = fopen("randomDouble.txt", "a");
+  long x;
+  long mant;
+  long exp = 1022;
+  long mask = 1;
   double d;
 
   union {
     double d;
-    int i;
+    long i;
   } b;
 
-  x = random();
+  while (1) {
+    x = random();
+    x <<= 32;
+    x = (long) random() | x;
+    if (x == 0) {
+      exp -= 31;
+    } else {
+      break;
+    }
+  }
 
   while (x & mask) {
     mask <<= 1;
@@ -106,8 +118,11 @@ double my_random_double()
   }
 
   // use the remaining bit as the mantissa
-  mant = x >> 8;
-  b.i = (exp << 23) | mant;
+  mant = x >> 11;
+  b.i = (exp << 52) | mant;
+
+  fprintf(file, "%f \n", b.d);
+  fclose(file);
 
   return b.d;
 }

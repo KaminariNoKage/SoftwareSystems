@@ -86,7 +86,7 @@ main (int argc, char *argv[])
 
   srandom (seed);
   t0 = get_seconds();
-  for (i=0; i<iters; i++) {
+  for (i=0; i<1000; i++) {
     f = my_random_double();
   }
   t1 = get_seconds();
@@ -95,7 +95,7 @@ main (int argc, char *argv[])
 
   srandom (seed);
   t0 = get_seconds();
-  for (i=0; i<iters; i++) {
+  for (i=0; i<1000; i++) {
     f = my_random_double();
   }
   t1 = get_seconds();
