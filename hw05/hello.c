@@ -22,29 +22,35 @@ void free_data (gpointer data)
 
 void parseLine (GHashTable *hash, char line[]){
 	char * pch;		//For parsing purposes
+	char * copy;
 	Word *keyval;
 
 	//Parse out the punctuation in the line
 	//Will hypthetically also ignore \n
-	pch = strtok(line, " ,.-:;");
+	pch = strtok(line, " ,.-:;*?!\n\r");
 	while (pch != NULL){
-		//If word in hash table
-		if (g_hash_table_contains(hash, pch)){
-			//Get the word, should return pointer to Word struct
-			keyval = g_hash_table_lookup(hash, pch);
-			//Up the counter of that word in the table
-			keyval->freq += 1;
 
-		} else {
+		if(pch != ""){
+			//If word in hash table
+			if (g_hash_table_lookup(hash, pch) != NULL){
+				//Get the word, should return pointer to Word struct
+				keyval = g_hash_table_lookup(hash, pch);
+				//Up the counter of that word in the table
+				keyval->freq += 1;
 
-			//Otherwise add new Word to the table with freq of 1
-			Word *word = malloc(sizeof(Word));
-			word->name = pch;
-			word->freq = 1;
-			g_hash_table_insert(hash, pch, word);
+			} else {
+
+				//Otherwise add new Word to the table with freq of 1
+				Word *word = malloc(sizeof(Word));
+				copy = malloc(sizeof(char) * (strlen(pch) + 1) );
+				strcpy(copy,pch);
+				word->name = copy;
+				word->freq = 1;
+				g_hash_table_insert(hash, pch, word);
+			}
 		}
 	
-		pch = strtok(NULL, " ,.-:;");
+		pch = strtok(NULL, " ,.-:;*?!\n\r");
 	}
 }
 
