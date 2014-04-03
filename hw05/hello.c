@@ -23,6 +23,7 @@ void free_data (gpointer data)
 void parseLine (GHashTable *hash, char line[]){
 	char * pch;		//For parsing purposes
 	char * copy;
+	Word *word;
 	Word *keyval;
 
 	//Parse out the punctuation in the line
@@ -41,7 +42,7 @@ void parseLine (GHashTable *hash, char line[]){
 			} else {
 
 				//Otherwise add new Word to the table with freq of 1
-				Word *word = malloc(sizeof(Word));
+				word = malloc(sizeof(Word));
 				copy = malloc(sizeof(char) * (strlen(pch) + 1) );
 				strcpy(copy,pch);
 				word->name = copy;
