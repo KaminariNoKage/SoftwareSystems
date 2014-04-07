@@ -74,7 +74,7 @@ int main(){
 	int i;
 
 	//Opening File, read only
-	file = fopen("grimms.txt", "r");
+	file = fopen("dummy.txt", "r");
 
 	//Go through file and get each line
 	while (fgets(line, 1000, file) != NULL){
