@@ -6,8 +6,7 @@ License: Creative Commons Attribution-ShareAlike 3.0
 */
 
 
-#include <stdio.h>  //ERROR 1: arrows, not brackets
-#include <stdlib.h> //ERROR(ish) 7: include to get things like malloc
+#include "stdio.h"
 
 typedef struct {
     double *data;
@@ -18,15 +17,15 @@ typedef struct {
 Vector *make_vector(int len) {
     Vector *vector = malloc(sizeof(Vector));
 
-    vector->data = calloc(len,len * sizeof(double *));  //ERROR 2: Not enough arguements
+    vector->data = calloc(len * sizeof(double *));
     vector->len = len;
     return vector;
 }
 
 // Frees the vector structure and its data array.
 void free_vector(Vector *vector) {
-    free(vector->data);     //ERROR 3: WRONG ORDER TO FREE, Free elements before freeing main vector
     free(vector);
+    free(vector->data);
 }
 
 // Prints the elements of a vector.
@@ -56,7 +55,7 @@ void consecutive_vector(Vector *vector) {
 	vector->data[i] = i;
     }
 }
-
+
 // Adds two vectors elementwise and stores the result in the given
 // destination vector (C).
 void add_vector(Vector *A, Vector *B, Vector *C) {
@@ -68,13 +67,12 @@ void add_vector(Vector *A, Vector *B, Vector *C) {
 }
 
 // Adds two vectors elementwise and returns a new vector.
-Vector *add_vector_func(Vector *A, Vector *B) {
+double *add_vector_func(Vector *A, Vector *B) {
     Vector *C = make_vector(A->len);
     add_vector(A, B, C);
-    return C;               //ERROR 6: Wrong return type, and incorrectly specified
 }
 
-int main() {        //ERROR 4: Forgot parenthesis
+int main {
     Vector *A = make_vector(4);
     consecutive_vector(A);
     printf("A\n");
@@ -93,5 +91,5 @@ int main() {        //ERROR 4: Forgot parenthesis
     free_vector(B);
     free_vector(C);
 
-    return 0;           //ERROR 5: FORGOT SEMICOLON
+    return 0
 }
