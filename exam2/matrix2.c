@@ -168,6 +168,106 @@ double *row_sum(Matrix *A) {
 
    Feel free to use row_sum().
 */
+double *col_sum(Matrix *A) {
+    double total;
+    int i, j;
+
+    double *res = malloc(A->cols * sizeof(double));
+
+    for (i=0; i < A->cols; i++) {
+        total = 0.0;
+        for (j=0; j < A->rows; j++){
+            total += A->data[j][i];
+        }
+        res[i] = total;
+    }
+    return res;
+}
+double *diag_sum(Matrix *A){
+    int i, j = 0;
+
+    //Index 0 = forward diagnol, 1 = backward diagnol
+    double *res = malloc(2 * sizeof(double));
+
+    //Going forward!
+    while (i < A->rows && j < A->cols) {
+        res[0] += A->data[i][j];
+        i++;
+        j++;
+    }
+    //Going Back! Reset i and j to be in range
+    i--;
+    j--;
+    while (i > -1 && j > -1) {
+        res[1] += A->data[i][j];
+        i--;
+        j--;
+    }
+
+    return res;
+
+}
+
+int test_rows(double *allRowSum, int leng, double magic){
+    int i;
+    //Check that each row total is the specificed number
+    for (i=0; i<leng; i++) {
+        if (magic != allRowSum[i]){
+            return 0;
+      }
+    }
+    return 1;
+}
+int test_cols(double *allColSum, int leng, double magic){
+    int j;
+    //Check that each total is the specified number
+    for (j=0; j<leng; j++){
+        if (magic != allColSum[j]){
+            return 0;
+        }
+    }
+    return 1;
+}
+int test_diag(double *allDiag, double magic){
+    int k;
+    //Check if forward the same as back
+    for (k=0; k < 2; k++){
+        if (magic != allDiag[k]){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int is_magic_square(Matrix *A){
+    //Case that rows and columns not the same
+    //Not a Square grid, so cannot be square
+    if (A->rows != A->cols){
+        printf("Not a square matrix\n");
+        return 0;
+    }
+
+    //Getting sum of rows
+    double *allRowSum = row_sum(A);
+    //Get sum of columns
+    double *allColSum = col_sum(A);
+    //Get sum of diagnols
+    double *allDiag = diag_sum(A);
+    //Get total of first row - all others should be the same either way
+    double magic = allRowSum[0];    
+
+    if (test_rows(allRowSum, A->rows, magic)){
+        if (test_cols(allColSum, A->cols, magic)){
+            if (test_diag(allDiag, magic)){
+                //If rows, cols, and diags are the same
+                //We have a magic square!
+                return 1;
+            }
+        }
+    }
+
+    return 0;
+}
 
 
 int main() {
@@ -202,6 +302,16 @@ int main() {
 	printf("row %d\t%lf\n", i, sums[i]);
     }
     // should print 6, 22, 38
+
+    //Test matrix
+    Matrix *E = make_matrix(3, 3);
+    increment_matrix(E, 1);
+
+    int magic1 = is_magic_square(A);    //Not Magic
+    int magic2 = is_magic_square(B);    //Not Magic
+    int magic3 = is_magic_square(E);    //Magic
+
+    printf("Magic Matrix result: %d , %d , %d \n", magic1, magic2, magic3);
 
     return 0;
 }
